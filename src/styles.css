@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Before */
+/* background: url('src/assets/spear.gif') center center / cover no-repeat; */
+
+/* After */
+/* background: url('../assets/6pyv.gif') center center / cover no-repeat; */
+
