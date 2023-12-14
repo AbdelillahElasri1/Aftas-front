@@ -39,7 +39,7 @@
         </div> -->
       </div>
       <!-- Content -->
-      <div class="flex-1 overflow-auto px-2 sm:px-0">
+      <div class="flex-1 overflow-auto scrollbar-hide px-2 sm:px-0">
         <div class=" flex justify-between items-center ">
           <h3 class="text-3xl font-extralight text-white/50">Competition</h3>
           <div class="inline-flex items-center space-x-2 ">
@@ -64,14 +64,61 @@
             </a>
             <a class="text-white/50 group-hover:text-white group-hover:smooth-hover text-center" href="#">Create competition</a>
           </div>
-          <div *ngFor="let competiton of competitions"  class="relative group bg-gray-900/80 py-10 sm:py-20 px-4 flex flex-col space-y-2 items-center  rounded-md hover:bg-gray-900 hover:smooth-hover">
+          <div *ngFor="let competition of competitions"  class="relative group bg-gray-900/80 py-10 sm:py-20 px-4 flex flex-col space-y-2 items-center  rounded-md hover:bg-gray-900 hover:smooth-hover">
+            <i *ngIf="!competition.showPopup" class="material-icons text-white absolute top-2 right-4 cursor-pointer" (click)="togglePopup(competition)">more_horiz</i>
+            <i *ngIf="competition.showPopup" class="material-icons text-white absolute top-2 right-4 cursor-pointer" (click)="togglePopup(competition)">close</i>
             <img class="w-20 h-20 object-cover object-center rounded-full" src="https://images.unsplash.com/photo-1571862827667-b8dec6e2418f?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="spearfishing" />
-            <h4 class="text-white text-2xl font-bold capitalize text-center">{{ competiton.location }}</h4>
-            <p class="text-white/50">{{ competiton.numberOfParticipants }} members</p>
-            <a class="text-red-500" (click)="deleteCompetition(competiton)" href="">delete</a>
+            <h4 class="text-white text-2xl font-bold capitalize text-center">{{ competition.location }}</h4>
+            <p class="text-white/50">{{ competition.numberOfParticipants }} members</p>
+            <!-- <a class="text-red-500" (click)="deleteCompetition(competition)" href="">delete</a> -->
             <!-- <p class="absolute top-2 text-white/20 inline-flex items-center text-xs">22 Online <span class="ml-2 w-2 h-2 block bg-green-500 rounded-full group-hover:animate-pulse"></span></p> -->
-          </div>
+            
+            
+
+
+            <!-- Popup -->
+            <div *ngIf="competition.showPopup" class="absolute top-0 right-10 mt-12 bg-white p-4 shadow-md rounded border border-gray-300">
+              <ul class="list-none p-0">
+                  <li class="mb-2">
+                      <a (click)="deletedCompetition(competition)" href="" class="flex items-center text-red-500 hover:text-red-700 px-4 py-2 rounded transition duration-300 ease-in-out">
+                          <i class="material-icons mr-2">delete</i> Delete
+                      </a>
+                  </li>
+                  <li class="mb-2">
+                      <a (click)="updateCompetition()" href="#" class="flex items-center text-blue-500 hover:text-blue-700 px-4 py-2 rounded transition duration-300 ease-in-out">
+                          <i class="material-icons mr-2">update</i> Update
+                      </a>
+                  </li>
+                  <li class="mb-2">
+                      <a (click)="showDetails(competition)" href="#" class="flex items-center text-green-500 hover:text-green-700 px-4 py-2 rounded transition duration-300 ease-in-out">
+                          <i class="material-icons mr-2">info</i> Show Details
+                      </a>
+                  </li>
+                  <li>
+                      <a (click)="addMember()" href="#" class="flex items-center text-indigo-500 hover:text-indigo-700 px-4 py-2 rounded transition duration-300 ease-in-out">
+                          <i class="material-icons mr-2">person_add</i> Add Member
+                      </a>
+                  </li>
+              </ul>
+            </div>  
+            <!-- Popup for competition details -->
+            <div *ngIf="competition.showDetailsPopup" class="absolute top-1/4 right-4 mt-6 bg-white p-4 shadow-md rounded-lg border border-gray-300 w-96">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold">{{ competition.code }}</h2>
+                <i class="material-icons text-gray-500 cursor-pointer" (click)="closeDetailsPopup()">close</i>
+              </div>
+              <div class="mb-2">
+                <p class="text-gray-600 p-1">Date: {{ competition.date }}</p>
+                <p class="text-gray-600 p-1">Start Time: {{ competition.startTime }}</p>
+                <p class="text-gray-600 p-1">End Time: {{ competition.endTime }}</p>
+                <p class="text-gray-600 p-1">Location: {{ competition.location }}</p>
+                <p class="text-gray-600 p-1">Participants: {{ competition.numberOfParticipants }}</p>
+                <p class="text-gray-600 p-1">Amount: {{ competition.amount }}</p>
+              </div>
+            </div>
         </div>
       </div>
+      
+      <!-- pagination end -->
     </div>
   </div>

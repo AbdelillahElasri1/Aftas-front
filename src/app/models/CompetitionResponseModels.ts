@@ -1,6 +1,8 @@
 import { Time } from "@angular/common";
 
 export interface CompetitionResponse {
+showDetailsPopup: any;
+showPopup: any;
     id: number,
     code: string,
     date: Date,
@@ -8,5 +10,6 @@ export interface CompetitionResponse {
     endTime: Time,
     numberOfParticipants: number,
     location: string,
-    amount: number
+    amount: number,
+    howDetailsPopup?: boolean;
 }
