@@ -13,13 +13,11 @@ export class CompetitionService {
   public getAllCompetitions(){
     return this.http.get<Array<CompetitionResponse>>("http://localhost:8080/api/v1/competition");
   }
-  getCompetitions(page: number, size: number) : Observable<CompetitionResponse[]>{
-    const params = new HttpParams()
-      .set('page', page.toString())
-      .set('size', size.toString());
-    
-    return this.http.get<CompetitionResponse[]>(`http://localhost:8080/api/v1/competition`, {params});
+
+  getByPage(page: number, size: number) : Observable<any>{
+    return this.http.get<any>("http://localhost:8080/api/v1/competition" + "?page=" + page + "&size=" + size);
   }
+
   public getCompetition(competition : CompetitionResponse) : Observable<CompetitionResponse>{
     return this.http.get<CompetitionResponse>(`http://localhost:8080/api/v1/competition/${competition.id}`);
   }

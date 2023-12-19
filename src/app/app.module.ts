@@ -8,18 +8,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddCompetitionComponent } from './pages/add-competition/add-competition.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { AddMemberComponent } from './shared/components/add-member/add-member.component';
+import { CompetitionDetailsComponent } from './pages/competition-details/competition-details.component';
+import { ListMemberComponent } from './shared/components/list-member/list-member.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    AddCompetitionComponent
+    AddCompetitionComponent,
+    AddMemberComponent,
+    CompetitionDetailsComponent,
+    ListMemberComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+   
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

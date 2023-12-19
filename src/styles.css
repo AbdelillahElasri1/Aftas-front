@@ -3,9 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Before */
-/* background: url('src/assets/spear.gif') center center / cover no-repeat; */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
 
-/* After */
-/* background: url('../assets/6pyv.gif') center center / cover no-repeat; */
+
+
+
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompetitionResponse } from 'src/app/models/CompetitionResponseModels';
 import { CompetitionService } from 'src/app/services/competition.service';
 
@@ -11,8 +12,15 @@ import { CompetitionService } from 'src/app/services/competition.service';
 export class DashboardComponent implements OnInit{
 
   competitions: Array<CompetitionResponse> = [];
+
+  showMemberList: boolean = false;
+  toggleMemberListVisibility() {
+    this.showMemberList = !this.showMemberList;
+  }
   
   isPopupVisible = false;
+
+  isPopupMemberVisible = false;
   openPopup(){
     this.isPopupVisible = true;
   }
@@ -20,12 +28,20 @@ export class DashboardComponent implements OnInit{
     this.isPopupVisible = false;
   }
 
-  constructor(private competitionService: CompetitionService , private fb: FormBuilder){}
-
-  ngOnInit(): void {
-    this.getAllCompetitions();
-    //this.loadCompetitions();
+  openMemberPopup(){
+    this.isPopupMemberVisible = true;
   }
+  closeMemberPopup(){
+    this.isPopupMemberVisible = false;
+  }
+
+  constructor(private competitionService: CompetitionService,
+     private fb: FormBuilder,
+     private route: ActivatedRoute,
+     private router: Router
+     ){}
+
+  
 
   getAllCompetitions(){
     this.competitionService.getAllCompetitions()
@@ -121,45 +137,31 @@ export class DashboardComponent implements OnInit{
 
   // pagination front end logic 
 
-  //TODO here
-  competitionList: CompetitionResponse = {} as CompetitionResponse;
-  currentPage = 1;
-  pageSize = 6;
-  totalPages = 0;
+  page:number = 1;
+  size:number = 0;
+  totalPages : number = 0;
+  ListCompetitions : Array<CompetitionResponse> = [];
+  ngOnInit(): void {
+    this.getAllCompetitions();
+    //this.loadCompetitions();
 
-  // loadCompetitions(): void {
-  //   this.competitionService.getCompetitions(this.currentPage, this.pageSize)
-  //     .subscribe({
-  //       next: (data:  CompetitionResponse) => {
-  //         this.competitionList = data
-  //         console.log(data);
-
-          
-  //         // this.competitionList = data as CompetitionResponse[];
-  //         // // Extract total pages from the response
-  //         // this.totalPages = Math.ceil(data.length / this.pageSize);
-  //       },
-  //       error: err => {
-  //         console.log(err);
-  //       }
-  //     });
-  // }
-
-  // nextPage(): void {
-  //   if (this.currentPage < this.totalPages) {
-  //     this.currentPage++;
-  //     this.loadCompetitions();
-  //   }
-  // }
-
-  // prevPage(): void {
-  //   if (this.currentPage > 1) {
-  //     this.currentPage--;
-  //     this.loadCompetitions();
-  //   }
-  // }
-
-  
+    this.route.queryParams.subscribe(params => {
+      this.page = params['page'] || 1;
+      this.size = params['size'] || 7;
+      this.competitionService.getByPage(this.page,this.size).subscribe({
+        next: data => {
+          console.log(data);
+          this.ListCompetitions = data.content as CompetitionResponse[];
+          this.totalPages = data.totalPages;
+        },
+        error: error => {
+          console.error('There was an error!', error);
+          console.log(error.error.message);
+          error.error.message;
+        }
+      });
+  });
+  }
 
 }
 

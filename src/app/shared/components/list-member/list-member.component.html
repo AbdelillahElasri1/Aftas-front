@@ -1,0 +1,56 @@
+<div class=" w-[1000px] h-[1000px] pt-4 ">
+    <div class="flex flex-col">
+      <div class="overflow-x-auto shadow-md sm:rounded-lg">
+          <div class="inline-block min-w-full align-middle">
+              <div class="overflow-hidden ">
+                  <table class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                      <thead class="bg-gray-100 dark:bg-gray-700">
+                          <tr>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  name
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  family Name
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                  accession Date
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                nationality
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Identify Document Type
+                              </th>
+                              <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                identify number
+                              </th>
+                              <th scope="col" class="p-4">
+                                  <span class="sr-only">Edit</span>
+                              </th>
+                              <th scope="col" class="p-4">
+                                <span class="sr-only">delete</span>
+                              </th>
+                          </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                          <tr *ngFor="let member of listMember" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.name }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ member.familyName }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.accessionDate }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.nationality }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyDocumentType }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyNumber }}</td>
+                              <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                  <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                              </td>
+                              <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
+                                <a (click)="deleteMember(member)" href="#" class="text-red-600 dark:text-red-500 hover:underline">delete</a>
+                            </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
