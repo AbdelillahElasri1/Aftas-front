@@ -25,7 +25,8 @@
                                 identify number
                               </th>
                               <th scope="col" class="p-4">
-                                  <span class="sr-only">edit</span>
+                                  <!-- <span class="sr-only">edit</span> -->
+                                  <a href="#" (click)="openPopup()" class="text-blue-600 dark:text-blue-500 hover:underline">hunting</a>
                               </th>
                               <th scope="col" class="p-4">
                                 <div class="relative w-48 inline-block">
@@ -50,16 +51,20 @@
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyDocumentType }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyNumber }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">hunting</a>
+                                <!-- <a href="#" (click)="openPopup()" class="text-blue-600 dark:text-blue-500 hover:underline">hunting</a> -->
+                                <span class="sr-only">edit</span>
                               </td>
                               <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                 <a (click)="deleteMember(member)" href="#" class="text-red-600 dark:text-red-500 hover:underline">delete</a>
                             </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <app-add-hunting *ngIf="isPopupVisible"  (closePopup)="closePopup()"></app-add-hunting>
+    </div>
   </div>
 </div>

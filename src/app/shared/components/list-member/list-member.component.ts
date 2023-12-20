@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, TitleStrategy } from '@angular/router';
 import { CompetitionResponse } from 'src/app/models/CompetitionResponseModels';
 import { MemberResponse } from 'src/app/models/MemberResponseModels';
@@ -11,6 +11,8 @@ import { MemberService } from 'src/app/services/member.service';
   styleUrls: ['./list-member.component.css']
 })
 export class ListMemberComponent implements OnInit{
+
+  @Output() addHuntingEvent = new EventEmitter<{ competitionCode: string, memberID: string }>();
 
   listMember: Array<MemberResponse> = []
   listCompetition : Array<CompetitionResponse> = []
@@ -45,9 +47,16 @@ export class ListMemberComponent implements OnInit{
   }
   }
 
+  selectedMemberID!: string ;
+
+
   // Method to handle competition code change event
   onCompetitionCodeChange(event: any): void {
     const selectedCode = event.target.value;
+    const competitionCode = event.target.value;
+    const memberID = this.selectedMemberID;
+
+    this.addHuntingEvent.emit({ competitionCode, memberID });
 
   if (selectedCode) {
     this.selectedCompetitionCode = selectedCode;
@@ -94,6 +103,17 @@ export class ListMemberComponent implements OnInit{
         location.reload();
       }
     });
+  }
+
+
+  // toggle : 
+  isPopupVisible = false;
+
+  openPopup(){
+    this.isPopupVisible = true;
+  }
+  closePopup(){
+    this.isPopupVisible = false;
   }
   
 
