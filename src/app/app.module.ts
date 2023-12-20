@@ -11,6 +11,8 @@ import { DatePipe } from '@angular/common';
 import { AddMemberComponent } from './shared/components/add-member/add-member.component';
 import { CompetitionDetailsComponent } from './pages/competition-details/competition-details.component';
 import { ListMemberComponent } from './shared/components/list-member/list-member.component';
+import { PodiumComponent } from './shared/components/podium/podium.component';
+import { AddHuntingComponent } from './shared/components/add-hunting/add-hunting.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { ListMemberComponent } from './shared/components/list-member/list-member
     AddMemberComponent,
     CompetitionDetailsComponent,
     ListMemberComponent,
+    PodiumComponent,
+    AddHuntingComponent,
   ],
   imports: [
     BrowserModule,

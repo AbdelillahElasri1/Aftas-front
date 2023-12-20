@@ -20,4 +20,7 @@ export class MemberService {
   public deleteMember(member: MemberResponse){
     return this.http.delete<any>(`http://localhost:8080/api/v1/member/${member.num}`);
   }
+  getAllMembersByCompetitionId(competitionId: number): Observable<MemberResponse[]> {
+    return this.http.get<MemberResponse[]>(`http://localhost:8080/api/v1/competition/${competitionId}/members`);
+  }
 }

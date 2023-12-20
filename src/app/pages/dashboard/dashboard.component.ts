@@ -14,9 +14,16 @@ export class DashboardComponent implements OnInit{
   competitions: Array<CompetitionResponse> = [];
 
   showMemberList: boolean = false;
+  showPodium: boolean = false;
+
   toggleMemberListVisibility() {
     this.showMemberList = !this.showMemberList;
   }
+  togglePodiumvisibility(){
+    this.showPodium = !this.showPodium;
+  }
+
+  
   
   isPopupVisible = false;
 

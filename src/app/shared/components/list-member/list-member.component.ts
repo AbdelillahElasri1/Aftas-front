@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, TitleStrategy } from '@angular/router';
+import { CompetitionResponse } from 'src/app/models/CompetitionResponseModels';
 import { MemberResponse } from 'src/app/models/MemberResponseModels';
+import { CompetitionService } from 'src/app/services/competition.service';
 import { MemberService } from 'src/app/services/member.service';
 
 @Component({
@@ -10,11 +13,46 @@ import { MemberService } from 'src/app/services/member.service';
 export class ListMemberComponent implements OnInit{
 
   listMember: Array<MemberResponse> = []
+  listCompetition : Array<CompetitionResponse> = []
 
-  constructor(private memberService: MemberService){}
+  filteredMembers: MemberResponse[] = [];
+  selectedCompetitionCode!: number ;
+
+  constructor(
+    private memberService: MemberService,
+    private competitionService: CompetitionService,
+    private route : ActivatedRoute
+    ){}
 
   ngOnInit(): void {
     this.getAllMembers();
+    this.getAllCompetitions();
+    this.loadMembers();
+  }
+
+  loadMembers(): void {
+    if(this.selectedCompetitionCode){
+    this.memberService.getAllMembersByCompetitionId(this.selectedCompetitionCode).subscribe({
+      next: data => {
+        this.listMember = data;
+        this.filteredMembers = [...this.listMember];
+      },
+      error: err => {
+        console.log(err);
+        
+      }
+    });
+  }
+  }
+
+  // Method to handle competition code change event
+  onCompetitionCodeChange(event: any): void {
+    const selectedCode = event.target.value;
+
+  if (selectedCode) {
+    this.selectedCompetitionCode = selectedCode;
+    this.loadMembers();
+  }
   }
 
   getAllMembers(){
@@ -29,6 +67,23 @@ export class ListMemberComponent implements OnInit{
       }
     })
   }
+
+  getAllCompetitions(){
+    this.competitionService.getAllCompetitions().subscribe({
+      next: data => {
+        console.log(data);
+        this.listCompetition = data
+        
+      }, 
+      error: err => {
+        console.log(err);
+        
+      }
+    })
+  }
+
+
+
 
   deleteMember(member: MemberResponse){
     if(confirm("etes vous sure?"))

@@ -25,15 +25,24 @@
                                 identify number
                               </th>
                               <th scope="col" class="p-4">
-                                  <span class="sr-only">Edit</span>
+                                  <span class="sr-only">edit</span>
                               </th>
                               <th scope="col" class="p-4">
-                                <span class="sr-only">delete</span>
+                                <div class="relative w-48 inline-block">
+                                    <select (change)="onCompetitionCodeChange($event)"  class="block appearance-none w-full bg-white border border-gray-300 text-gray-700 py-2 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                            <option value="">choose code...</option>
+                                            <option *ngFor="let competitions of listCompetition" [value]="competitions.id">{{competitions.id }} : {{competitions.location}}</option>
+                                    </select>
+                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                      <!-- Heroicon name: solid/chevron-down -->
+                                      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M5 7l5 5 5-5H5z"/></svg>
+                                    </div>
+                                  </div>
                               </th>
                           </tr>
                       </thead>
                       <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-                          <tr *ngFor="let member of listMember" class="hover:bg-gray-100 dark:hover:bg-gray-700">
+                          <tr *ngFor="let member of filteredMembers" class="hover:bg-gray-100 dark:hover:bg-gray-700">
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.name }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap dark:text-white">{{ member.familyName }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.accessionDate }}</td>
@@ -41,7 +50,7 @@
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyDocumentType }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ member.identifyNumber }}</td>
                               <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                                  <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                <a href="#" class="text-blue-600 dark:text-blue-500 hover:underline">hunting</a>
                               </td>
                               <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
                                 <a (click)="deleteMember(member)" href="#" class="text-red-600 dark:text-red-500 hover:underline">delete</a>
